@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Proposal 💖</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Comic Sans MS', cursive;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    width:90%;
+    max-width:420px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    position:relative;
+}
+
+h1{
+    color:#ff3366;
+    margin-bottom:25px;
+}
+
+/* Buttons row */
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    position:relative;
+    height:80px;
+}
+
+button{
+    padding:12px 28px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+/* YES */
+#yes{
+    background:#ff3366;
+    color:#fff;
+}
+
+/* NO slightly upper */
+#no{
+    background:#ccc;
+    margin-top:-15px;
+    position:relative;
+}
+
+/* Hearts */
+.heart{
+    position:absolute;
+    font-size:20px;
+    animation:float 6s linear infinite;
+    opacity:0.8;
+}
+
+@keyframes float{
+    0%{ transform:translateY(0); opacity:1; }
+    100%{ transform:translateY(-110vh); opacity:0; }
+}
+
+/* Result screen */
+.result{
+    display:none;
+}
+
+.result h2{
+    color:#ff3366;
+    margin-bottom:15px;
+}
+
+.card{
+    background:#ffe6ec;
+    padding:20px;
+    border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Proposal -->
+<div class="container" id="proposal">
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+        <button id="yes">YES 💕</button>
+        <button id="no">NO 😜</button>
+    </div>
+</div>
+
+<!-- Result -->
+<div class="container result" id="result">
+    <h2>Yay! 🎉 Good Choice! 💖</h2>
+    <div class="card">
+        <h3>GOOD CHOICE! 💑</h3>
+        <p style="margin-top:10px;">
+            I knew you'd say yes! 💕<br>
+            You've made me the happiest person in the world.<br>
+            Can't wait to celebrate this special day with you 🌹
+        </p>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const proposal = document.getElementById("proposal");
+    const result = document.getElementById("result");
+
+    function moveNo(){
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+        noBtn.style.position = "fixed";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+
+    yesBtn.addEventListener("click", () => {
+        proposal.style.display = "none";
+        result.style.display = "block";
+    });
+
+    function createHeart(){
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "-20px";
+        heart.style.fontSize = (15 + Math.random() * 25) + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+});
+</script>
+
+</body>
+</html>
